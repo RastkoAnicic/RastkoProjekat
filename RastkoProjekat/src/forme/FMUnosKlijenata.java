@@ -186,23 +186,23 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         DocumentListener dl = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-               if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$")
-                   jerror_telefon.setText("Morate uneti validan broj.");
+               if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
                jerror_telefon.setVisible(true);
+                   jerror_telefon.setText("Morate uneti validan broj.");}
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$")
-                   jerror_telefon.setText("Morate uneti validan broj.");  
-                jerror_telefon.setVisible(true);
+                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
+               jerror_telefon.setVisible(true);
+                   jerror_telefon.setText("Morate uneti validan broj.");}
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$")
-                   jerror_telefon.setText("Morate uneti validan broj.");  
-                jerror_telefon.setVisible(true);
+                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
+               jerror_telefon.setVisible(true);
+                   jerror_telefon.setText("Morate uneti validan broj.");}
             }
         };
         // TODO add your handling code here:
@@ -386,7 +386,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         if (!unos.contains(" ")) {
             jerror_ime_prezime.setText("Morate uneti jedno ime i jedno prezime");
             jerror_ime_prezime.setVisible(true);
-            System.out.println(unos);
+            
             return;
         }
 
@@ -406,37 +406,44 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
 
     private void listenerTelefon() {
 
+        
+        
+        String telefon = telefonKlijenta_txt.getText();
+        
         DocumentListener dl = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                proveriTelefon();
+                proveriTelefon(telefon);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                proveriTelefon();
+                proveriTelefon(telefon);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                proveriTelefon();
+                proveriTelefon(telefon);
             }
         };
+        telefonKlijenta_txt.getDocument().addDocumentListener(dl);
     }
     
-    public void proveriTelefon() {
+    public void proveriTelefon(String telefon) {
         
-        String telefon = telefonKlijenta_txt.getText();
         
-        if (!telefon.contains("^[0][0-9]{8,9}$") || !telefon.contains("^[+][0-9]{11,12}$")){
-                   jerror_telefon.setText("Morate uneti validan broj.");
+        
+        jerror_telefon.setVisible(true);
+        
+        if (!telefon.contains("[0-9]{8,9}$")){
                    jerror_telefon.setVisible(true);
+                   jerror_telefon.setText("Morate uneti validan broj.");
                     return;
         }
         
         if (telefon == ""){
-            jerror_telefon.setText("Ovo polje je obavezno.");
             jerror_telefon.setVisible(true);
+            jerror_telefon.setText("Ovo polje je obavezno.");
                 return;
         }
         
