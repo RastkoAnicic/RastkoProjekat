@@ -17,15 +17,17 @@ public class Aranzman implements Serializable   {
     private String naziv;
     private TipAranzmana tipAranzmana;
     private Mesto mesto;
+    double cena;
 
     public Aranzman() {
     }
 
-    public Aranzman(int aranzmanID, String naziv, TipAranzmana tipAranzmana, Mesto mesto) {
+    public Aranzman(int aranzmanID, String naziv, TipAranzmana tipAranzmana, Mesto mesto, double cena) {
         this.aranzmanID = aranzmanID;
         this.naziv = naziv;
         this.tipAranzmana = tipAranzmana;
         this.mesto = mesto;
+        this.cena = cena;
     }
 
     public TipAranzmana getTipAranzmana() {
@@ -36,6 +38,14 @@ public class Aranzman implements Serializable   {
         this.tipAranzmana = tipAranzmana;
     }
 
+    public void setCena(double cena){
+        this.cena = cena;
+    }
+    
+    public double getCena(){
+        return cena;
+    }
+    
     public int getAranzmanID() {
         return aranzmanID;
     }

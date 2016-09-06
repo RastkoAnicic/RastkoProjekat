@@ -10,11 +10,11 @@ import domen.Aranzman;
 import domen.Drzava;
 import domen.Klijent;
 import domen.Mesto;
+import domen.Racun;
 import domen.TipAranzmana;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -198,11 +198,31 @@ public class Kontrolor {
         ObjectInputStream in = new ObjectInputStream(s.getInputStream());
         ServerTransferObjekat sto = (ServerTransferObjekat) in.readObject();
         if (sto.getStatus() == util.Util.SERVER_STATUS_OPERACIJA_OK) {
+            mapa.put("aranzmani", (List<Aranzman>)sto.getRezultat());
             return (List<Aranzman>) sto.getRezultat();
         } else {
             throw new Exception(sto.getGreska());
         }
 
+    }
+
+    public LinkedList<Racun> vratiListuRacuna() throws Exception {
+        
+        Socket s = (Socket) getMapa().get(util.Util.MAP_KEY_SOKET);
+        ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
+
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(util.Util.OPERACIJA_VRATI_LISTU_RACUNA);
+        out.writeObject(kto);
+
+        ObjectInputStream in = new ObjectInputStream(s.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) in.readObject();
+        if (sto.getStatus() == util.Util.SERVER_STATUS_OPERACIJA_OK) {
+            return(LinkedList<Racun>) sto.getRezultat();
+        } else {
+            throw new Exception(sto.getGreska());
+        }
+        
     }
 
 }

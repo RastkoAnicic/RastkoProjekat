@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableModelAranzmani extends AbstractTableModel {
 
-    List<Aranzman> aranzmani;
+    private List<Aranzman> aranzmani;
 
     public TableModelAranzmani(List<Aranzman> aranzmani) {
         this.aranzmani = aranzmani;
@@ -65,6 +65,14 @@ public class TableModelAranzmani extends AbstractTableModel {
             default:
                 return "nista";
         }
+    }
+
+    public List<Aranzman> getAranzmani() {
+        return aranzmani;
+    }
+
+    public void setAranzmani(List<Aranzman> aranzmani) {
+        this.aranzmani = aranzmani;
     }
 
 }

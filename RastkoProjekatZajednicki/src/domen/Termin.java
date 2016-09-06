@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Rastko
  */
-class Termin implements Serializable{
+public class Termin implements Serializable{
     
     private int terminID;
     private Date datumOd;

@@ -23,5 +23,6 @@ public class Util {
     public static final int OPERACIJA_VRATI_LISTU_MESTA = 6;
     public static final int OPERACIJA_VRATI_LISTU_ARANZMANA_PRAVIH = 7;
     public static final int OPERACIJA_UNESI_KLIJENTA = 8;
+    public static final int OPERACIJA_VRATI_LISTU_RACUNA = 9;
     
 }

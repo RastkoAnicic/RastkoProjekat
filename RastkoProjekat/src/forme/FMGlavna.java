@@ -31,6 +31,8 @@ public class FMGlavna extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         klijent = new javax.swing.JMenu();
         pretragaKlijenata = new javax.swing.JMenuItem();
@@ -38,6 +40,11 @@ public class FMGlavna extends javax.swing.JFrame {
         aranzman = new javax.swing.JMenu();
         pretraga_aranzmana = new javax.swing.JMenuItem();
         unos_aranzmana = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Turisticka agencija");
@@ -79,6 +86,14 @@ public class FMGlavna extends javax.swing.JFrame {
             }
         });
         aranzman.add(unos_aranzmana);
+
+        jMenuItem3.setText("Racun");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        aranzman.add(jMenuItem3);
 
         jMenuBar1.add(aranzman);
 
@@ -122,6 +137,12 @@ public class FMGlavna extends javax.swing.JFrame {
         unos.setVisible(true);
     }//GEN-LAST:event_unos_aranzmanaActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+      FMRacun fmr = new FMRacun(this, true);
+      fmr.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,6 +182,9 @@ public class FMGlavna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aranzman;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu klijent;
     private javax.swing.JMenuItem pretragaKlijenata;
     private javax.swing.JMenuItem pretraga_aranzmana;

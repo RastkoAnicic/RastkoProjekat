@@ -11,6 +11,7 @@ import domen.Drzava;
 import domen.Klijent;
 import domen.Mesto;
 import domen.Racun;
+import domen.StavkaRacuna;
 import domen.TipAranzmana;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,6 +20,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import transferObjekat.KlijentTransferObjekat;
 import transferObjekat.ServerTransferObjekat;
@@ -149,6 +151,15 @@ public class NitKlijent extends Thread {
                     
                         break;
                     }
+                    case util.Util.OPERACIJA_VRATI_LISTU_RACUNA: {
+                        ObjectOutputStream out = new ObjectOutputStream(ks.getOutputStream());
+                        List<Racun> racuni = DBKomunikacija.getInstance().vratiListuRacuna();
+                        ServerTransferObjekat sto = new ServerTransferObjekat();
+                        sto.setRezultat(racuni);
+                        sto.setStatus(util.Util.SERVER_STATUS_OPERACIJA_OK);
+                        out.writeObject(sto);
+                    break;
+                    }
                     default: System.out.println("Zaboravio si da napisis kejs");
                        
                 }
@@ -156,7 +167,9 @@ public class NitKlijent extends Thread {
             }
 
         } catch (Exception e) {
-             e.printStackTrace();
+            System.out.println("usao u catch u niti");
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
             
 
         }

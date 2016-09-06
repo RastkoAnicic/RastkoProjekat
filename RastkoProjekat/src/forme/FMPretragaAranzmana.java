@@ -56,6 +56,7 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
         jcmb_drzava = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_aranzmani = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Unos aranzmana");
@@ -94,30 +95,42 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jtbl_aranzmani);
 
+        jButton1.setText("Pretraži");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcmb_drzava, 0, 217, Short.MAX_VALUE)
-                            .addComponent(jcmb_tipAranzmana, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(65, 65, 65))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcmb_drzava, 0, 217, Short.MAX_VALUE)
+                                    .addComponent(jcmb_tipAranzmana, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcmb_tipAranzmana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -125,32 +138,33 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jcmb_drzava, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 159, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcmb_tipAranzmanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmb_tipAranzmanaActionPerformed
-        
+
         TipAranzmana aranzman = (TipAranzmana) jcmb_tipAranzmana.getSelectedItem();
-        
+
         try {
             List<Drzava> drzave = Kontrolor.getInstance().vratiDrzaveZaAranzman(aranzman);
             jcmb_drzava.setModel(new DefaultComboBoxModel(drzave.toArray()));
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Nije uspesno vracena lista");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jcmb_tipAranzmanaActionPerformed
 
     private void jcmb_drzavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmb_drzavaActionPerformed
-        
+
         List<Aranzman> aranzmani = new LinkedList<>();
         List<Drzava> drzave = new LinkedList<>();
         try {
@@ -161,21 +175,39 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
         for (Aranzman ar : aranzmani) {
             drzave.add(ar.getMesto().getDrzava());
         }
-                
+
         Drzava drzava = (Drzava) jcmb_drzava.getSelectedItem();
-        
+
         for (Drzava drz : drzave) {
-            if (drzava == drz){
+            if (drzava == drz) {
                 aranzmani.clear();
-               
+
             }
-            
+
         }
-        
+
         TableModelAranzmani tbl = new TableModelAranzmani(aranzmani);
-        
+
         jtbl_aranzmani.setModel(tbl);
     }//GEN-LAST:event_jcmb_drzavaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //  TableModelAranzmani tma = (TableModelAranzmani) jtbl_aranzmani.getModel();
+        List<Aranzman> aranzmani = (List<Aranzman>) Kontrolor.getInstance().getMapa().get("aranzmani");
+        System.out.println(aranzmani.get(2).getMesto().getDrzava().getNaziv() + "  " + aranzmani.get(2).getTipAranzmana().getNaziv());
+        List<Aranzman> novi = new LinkedList<>();
+        Drzava d = (Drzava) jcmb_drzava.getSelectedItem();
+        TipAranzmana ta = (TipAranzmana) jcmb_tipAranzmana.getSelectedItem();
+        for (Aranzman aranzman : aranzmani) {
+            if (aranzman.getMesto().getDrzava().getDrzavaID() == d.getDrzavaID() && aranzman.getTipAranzmana().getTipAranzmanaID() == ta.getTipAranzmanaID()) {
+                novi.add(aranzman);
+            }
+        }
+        TableModelAranzmani tma = new TableModelAranzmani(novi);
+        jtbl_aranzmani.setModel(tma);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +253,7 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
@@ -241,32 +274,32 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
 
     private void popuniComboe() {
 
-            List<TipAranzmana> aranzmani = new LinkedList<>();
-            aranzmani.add(new TipAranzmana(999, "Izaberite tip"));
+        List<TipAranzmana> aranzmani = new LinkedList<>();
+        aranzmani.add(new TipAranzmana(999, "Izaberite tip"));
         try {
             aranzmani.addAll(Kontrolor.getInstance().vratiListuAranzmana());
-           jcmb_tipAranzmana.setModel(new DefaultComboBoxModel(aranzmani.toArray()));
+            jcmb_tipAranzmana.setModel(new DefaultComboBoxModel(aranzmani.toArray()));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        
-        
+
     }
 
     private void ubaciTabelu() {
-        
+
         List<Drzava> drzava = new LinkedList<>();
-        drzava.add(new Drzava(-1,"Izaberite aranzman"));
+        drzava.add(new Drzava(-1, "Izaberite aranzman"));
         jcmb_drzava.setModel(new DefaultComboBoxModel(drzava.toArray()));
-        
+
         List<Aranzman> aranzmani = new LinkedList<>();
         try {
             aranzmani = Kontrolor.getInstance().vratiListuAranzmanaPravih();
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Ne mogu da pronadjem aranzmane");
         }
         TableModelAranzmani tbl = new TableModelAranzmani(aranzmani);
-                
+
         jtbl_aranzmani.setModel(tbl);
         jtbl_aranzmani.getTableHeader().setReorderingAllowed(false);
     }

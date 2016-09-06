@@ -8,8 +8,6 @@ package forme;
 import domen.Klijent;
 import java.awt.Dialog;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -38,6 +36,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         validacija();
+        postaviOsluskivaceZaTelefon();
     }
 
     /**
@@ -182,51 +181,143 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
 
     private void telefonKlijenta_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonKlijenta_txtActionPerformed
 
-        String telefon = telefonKlijenta_txt.getText();
-        DocumentListener dl = new DocumentListener() {
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefonKlijenta_txtActionPerformed
+
+    private void postaviOsluskivaceZaTelefon() {
+
+        telefonKlijenta_txt.getDocument().addDocumentListener(new DocumentListener() {
+
             @Override
             public void insertUpdate(DocumentEvent e) {
-               if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
-               jerror_telefon.setVisible(true);
-                   jerror_telefon.setText("Morate uneti validan broj.");}
+                String telefon = telefonKlijenta_txt.getText();
+//                System.out.println(telefon + " " + telefon.length());
+                if (!(telefon.matches("^[0][0-9]{8,9}$") || telefon.matches("^[+][0-9]{11,12}$"))) {
+                    jerror_telefon.setVisible(true);
+                    jerror_telefon.setText("Morate uneti validan broj.");
+                } else {
+                    jerror_telefon.setVisible(false);
+
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
-               jerror_telefon.setVisible(true);
-                   jerror_telefon.setText("Morate uneti validan broj.");}
+                String telefon = telefonKlijenta_txt.getText();
+//                System.out.println(telefon + " " + telefon.length());
+                if (!(telefon.matches("^[0][0-9]{8,9}$") || telefon.matches("^[+][0-9]{11,12}$"))) {
+                    jerror_telefon.setVisible(true);
+                    jerror_telefon.setText("Morate uneti validan broj.");
+                } else {
+                    jerror_telefon.setVisible(false);
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                if (telefon != "^[0][0-9]{8,9}$" || telefon != "^[+][0-9]{11,12}$"){
-               jerror_telefon.setVisible(true);
-                   jerror_telefon.setText("Morate uneti validan broj.");}
+                String telefon = telefonKlijenta_txt.getText();
+//                System.out.println(telefon + " " + telefon.length());
+                if (!(telefon.matches("^[0][0-9]{8,9}$") || telefon.matches("^[+][0-9]{11,12}$"))) {
+                    jerror_telefon.setVisible(true);
+                    jerror_telefon.setText("Morate uneti validan broj.");
+                } else {
+                    jerror_telefon.setVisible(false);
+                }
             }
-        };
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefonKlijenta_txtActionPerformed
+        });
+
+        eMailKlijenta_txt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String email = eMailKlijenta_txt.getText().toLowerCase();
+                if (!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
+                    jerror_mail.setVisible(true);
+                    jerror_mail.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_mail.setVisible(false);
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String email = eMailKlijenta_txt.getText().toLowerCase();
+                if (!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
+                    jerror_mail.setVisible(true);
+                    jerror_mail.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_mail.setVisible(false);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                String email = eMailKlijenta_txt.getText().toLowerCase();
+                if (!email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) {
+                    jerror_mail.setVisible(true);
+                    jerror_mail.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_mail.setVisible(false);
+                }
+            }
+        });
+
+        jmbgKlijenta_txt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String jmbg = jmbgKlijenta_txt.getText().toLowerCase();
+                if (!jmbg.matches("^[0-9]{13}")) {
+                    jerror_jmbg.setVisible(true);
+                    jerror_jmbg.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_jmbg.setVisible(false);
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String jmbg = jmbgKlijenta_txt.getText().toLowerCase();
+                if (!jmbg.matches("^[0-9]{13}")) {
+                    jerror_jmbg.setVisible(true);
+                    jerror_jmbg.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_jmbg.setVisible(false);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                String jmbg = jmbgKlijenta_txt.getText().toLowerCase();
+                if (!jmbg.matches("^[0-9]{13}")) {
+                    jerror_jmbg.setVisible(true);
+                    jerror_jmbg.setText("Morate uneti ispravnu adresu.");
+                } else {
+                    jerror_jmbg.setVisible(false);
+                }
+            }
+        });
+    }
 
     private void sacuvajKlijenta_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sacuvajKlijenta_btnActionPerformed
         // TODO add your handling code here:
-        Klijent klijent = new Klijent();
-
-        String imePrezimeKlijenta = ImePrezimeKlijenta_txt.getText();
-        String[] nizImena = imePrezimeKlijenta.split(" ");
-
-        klijent.setIme(nizImena[0]);
-        klijent.setPrezime(nizImena[1]);
-        klijent.setMejl(eMailKlijenta_txt.getText());
-        klijent.setJmbg(jmbgKlijenta_txt.getText());
-        klijent.setTelefon(telefonKlijenta_txt.getText());
         try {
-             System.out.println("forme.FMUnosKlijenata.sacuvajKlijenta_btnActionPerformed()");   
+        validiraj();
+            Klijent klijent = new Klijent();
+
+            String imePrezimeKlijenta = ImePrezimeKlijenta_txt.getText();
+            String[] nizImena = imePrezimeKlijenta.split(" ");
+
+            klijent.setIme(nizImena[0]);
+            klijent.setPrezime(nizImena[1]);
+            klijent.setMejl(eMailKlijenta_txt.getText());
+            klijent.setJmbg(jmbgKlijenta_txt.getText());
+            klijent.setTelefon(telefonKlijenta_txt.getText());
+            System.out.println("forme.FMUnosKlijenata.sacuvajKlijenta_btnActionPerformed()");
+          
             Kontrolor.getInstance().unesiKlijenta(klijent);
             JOptionPane.showMessageDialog(this, "Uspešno ste uneli klijenta");
         } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Klijent nije uspešno unet.");
+//            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_sacuvajKlijenta_btnActionPerformed
 
@@ -354,8 +445,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
     private void validacija() {
 
         ListenerImePrezime();
-        listenerTelefon();
-        
+
     }
 
     private void ListenerImePrezime() {
@@ -386,7 +476,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         if (!unos.contains(" ")) {
             jerror_ime_prezime.setText("Morate uneti jedno ime i jedno prezime");
             jerror_ime_prezime.setVisible(true);
-            
+
             return;
         }
 
@@ -394,22 +484,20 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
             jerror_ime_prezime.setText("Ovo polje je obavezno");
             return;
         }
-        
+
         String[] niz = unos.split(" ");
         if (niz.length != 2) {
             jerror_ime_prezime.setText("Uneli ste vise od jednog prezimena");
             return;
         }
-        jerror_ime_prezime.setText("");
-        
+        jerror_ime_prezime.setVisible(false);
+
     }
 
     private void listenerTelefon() {
 
-        
-        
         String telefon = telefonKlijenta_txt.getText();
-        
+
         DocumentListener dl = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -428,28 +516,62 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         };
         telefonKlijenta_txt.getDocument().addDocumentListener(dl);
     }
-    
+
     public void proveriTelefon(String telefon) {
-        
-        
-        
+
         jerror_telefon.setVisible(true);
-        
-        if (!telefon.contains("[0-9]{8,9}$")){
-                   jerror_telefon.setVisible(true);
-                   jerror_telefon.setText("Morate uneti validan broj.");
-                    return;
+
+        if (!telefon.contains("[0-9]{8,9}$")) {
+            jerror_telefon.setVisible(true);
+            jerror_telefon.setText("Morate uneti validan broj.");
+            return;
         }
-        
-        if (telefon == ""){
+
+        if (telefon == "") {
             jerror_telefon.setVisible(true);
             jerror_telefon.setText("Ovo polje je obavezno.");
-                return;
+            return;
+        }
+
+        jerror_telefon.setText("");
+
+    }
+
+    private void validiraj() throws Exception{
+        
+        List<Klijent> klijenti = kontrolor.Kontrolor.getInstance().vratiListuKlijenata();
+        
+        for (Klijent klijent : klijenti) {
+            if (jmbgKlijenta_txt.getText().equals(klijent.getJmbg()))
+                throw new Exception("Klijent vec postoji u bazi");
         }
         
-        jerror_telefon.setText("");
+        if (ImePrezimeKlijenta_txt.getText().equals("")){
+            throw new Exception("Morate uneti ime i prezime");
+        }
+        if (jmbgKlijenta_txt.getText().equals("")){
+            throw new Exception("Morate uneti JMBG");
+        }
+        if (eMailKlijenta_txt.getText().equals("") || telefonKlijenta_txt.getText().equals("")){
+            throw new Exception("Morate uneti ili telefon ili email");
+        }
+               
+        
+        if (jerror_ime_prezime.isVisible()){
+            throw new Exception("Pogresno uneto ime i prezime");
+        }
+        
+        if (jerror_jmbg.isVisible()){
+            throw new Exception("Pogresno unet jmbg");
+        }
+        if (jerror_mail.isVisible()){
+            throw new Exception("Pogresno unet email");
+        }
+        if (jerror_telefon.isVisible()){
+            throw new Exception("Pogresno unet broj telefona");
+        }
+        
         
     }
-    
 
 }

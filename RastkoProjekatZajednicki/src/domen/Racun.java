@@ -7,6 +7,7 @@ package domen;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  *
@@ -15,18 +16,26 @@ import java.util.Date;
 public class Racun implements Serializable {
     
     private int brojRacuna;
-    private double iznos;
-    private Date datum;
+    private double ukupanIznos;
+    private Date datumRacuna;
     private Klijent klijent;
+    private Aranzman aranzman;
+    private Termin termin;
+    
+    LinkedList<StavkaRacuna> stavkeRacuna;
 
     public Racun() {
+        stavkeRacuna = new LinkedList<>();
     }
 
-    public Racun(int brojRacuna, double iznos, Date datum, Klijent klijent) {
+    public Racun(int brojRacuna, double iznos, Date datum, Klijent klijent, Termin termin, Aranzman aranzman) {
         this.brojRacuna = brojRacuna;
-        this.iznos = iznos;
-        this.datum = datum;
+        this.ukupanIznos = iznos;
+        this.datumRacuna = datum;
         this.klijent = klijent;
+        this.aranzman = aranzman;
+        this.termin = termin;
+        stavkeRacuna = new LinkedList<>();
     }
 
     public Klijent getKlijent() {
@@ -45,20 +54,36 @@ public class Racun implements Serializable {
         this.brojRacuna = brojRacuna;
     }
 
-    public double getIznos() {
-        return iznos;
+    public double getUkupanIznos() {
+        return ukupanIznos;
     }
 
-    public void setIznos(double iznos) {
-        this.iznos = iznos;
+    public void setUkupanIznos(double iznos) {
+        this.ukupanIznos = iznos;
     }
 
     public Date getDatum() {
-        return datum;
+        return datumRacuna;
     }
 
     public void setDatum(Date datum) {
-        this.datum = datum;
+        this.datumRacuna = datum;
+    }
+
+    public Aranzman getAranzman() {
+        return aranzman;
+    }
+
+    public void setAranzman(Aranzman aranzman) {
+        this.aranzman = aranzman;
+    }
+
+    public Termin getTermin() {
+        return termin;
+    }
+
+    public void setTermin(Termin termin) {
+        this.termin = termin;
     }
     
     
