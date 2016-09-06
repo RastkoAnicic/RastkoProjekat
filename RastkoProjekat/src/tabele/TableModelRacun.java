@@ -5,6 +5,7 @@
  */
 package tabele;
 
+import domen.Aranzman;
 import domen.Racun;
 import domen.StavkaRacuna;
 import java.util.LinkedList;
@@ -57,7 +58,7 @@ public class TableModelRacun extends AbstractTableModel {
             case 2:
                 return r.getAranzman().getMesto().getNaziv();
             case 3:
-                return r.getTermin().getDatumOd() + " " + r.getTermin().getDatumDo();
+                //return r.getTermin().getDatumOd() + " " + r.getTermin().getDatumDo();
             case 4:
                 return "";
             case 5:
@@ -90,12 +91,26 @@ public class TableModelRacun extends AbstractTableModel {
         }
     }
 
-    public LinkedList<Racun> getStavkeRacuna() {
+    public LinkedList<Racun> getRacuni() {
         return racuni;
     }
 
     public void setStavkeRacuna(LinkedList<Racun> stavkeRacuna) {
         this.racuni = stavkeRacuna;
+    }
+
+    public void obrisiRed(int e) {
+        
+        racuni.remove(e);
+        fireTableDataChanged();
+    }
+
+    public void ubaciAranzman(Aranzman ar) {
+        
+        Racun r = new Racun();
+        r.setAranzman(ar);        
+        racuni.add(r);
+        fireTableDataChanged();
     }
 
 }

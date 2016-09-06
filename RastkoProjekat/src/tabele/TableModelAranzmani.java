@@ -75,4 +75,9 @@ public class TableModelAranzmani extends AbstractTableModel {
         this.aranzmani = aranzmani;
     }
 
+    public void obrisiRed(int e) {
+        
+        aranzmani.remove(e);
+        fireTableDataChanged();
+    }
 }

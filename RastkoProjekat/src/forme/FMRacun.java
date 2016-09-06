@@ -5,16 +5,18 @@
  */
 package forme;
 
+import domen.Aranzman;
 import domen.Klijent;
 import domen.Racun;
-import domen.StavkaRacuna;
 import java.text.ParseException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import tabele.TableModelAranzmani;
 import tabele.TableModelRacun;
 
 /**
@@ -50,6 +52,7 @@ public class FMRacun extends javax.swing.JDialog {
         jbt_obrisi_sa_racuna = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela_racun = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jbt_dodaj_na_racun = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -85,7 +88,12 @@ public class FMRacun extends javax.swing.JDialog {
             }
         });
 
-        jbt_obrisi_sa_racuna.setText("Obrisi sa racuna");
+        jbt_obrisi_sa_racuna.setText("Obrisi sa računa");
+        jbt_obrisi_sa_racuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_obrisi_sa_racunaActionPerformed(evt);
+            }
+        });
 
         tabela_racun.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,6 +108,8 @@ public class FMRacun extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tabela_racun);
 
+        jButton1.setText("Sačuvaj");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -107,7 +117,10 @@ public class FMRacun extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbt_obrisi_sa_racuna)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbt_obrisi_sa_racuna))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -117,13 +130,20 @@ public class FMRacun extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbt_obrisi_sa_racuna)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbt_obrisi_sa_racuna)
+                    .addComponent(jButton1))
                 .addGap(60, 60, 60))
         );
 
         jTabbedPane1.addTab("Racun", jPanel3);
 
         jbt_dodaj_na_racun.setText("Dodaj na racun");
+        jbt_dodaj_na_racun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_dodaj_na_racunActionPerformed(evt);
+            }
+        });
 
         tabela_proizvodi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,7 +182,7 @@ public class FMRacun extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Proizvodi", jPanel1);
 
-        jbt_pronadji.setText("Pronadji");
+        jbt_pronadji.setText("Pronađi");
         jbt_pronadji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbt_pronadjiActionPerformed(evt);
@@ -176,9 +196,7 @@ public class FMRacun extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1)
-                        .addGap(109, 109, 109))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,8 +204,8 @@ public class FMRacun extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbt_pronadji)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_dodaj_novog)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btn_dodaj_novog)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +217,7 @@ public class FMRacun extends javax.swing.JDialog {
                     .addComponent(jbt_pronadji)
                     .addComponent(btn_dodaj_novog))
                 .addGap(33, 33, 33)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,23 +246,23 @@ public class FMRacun extends javax.swing.JDialog {
 
     private void jbt_pronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_pronadjiActionPerformed
 
-
         try {
             String ime = jtxt_pretraga_klijenta.getText();
             LinkedList<Klijent> klijenti = (LinkedList<Klijent>) kontrolor.Kontrolor.getInstance().vratiListuKlijenata();
-            
+
             for (Klijent klijent : klijenti) {
 
                 String imePrezime = klijent.getIme() + " " + klijent.getPrezime();
 
                 if (imePrezime.toLowerCase().contains(ime.toLowerCase())) {
                     ubaciRacunKlijentaUTabelu(klijent.getJmbg());
+                    jtxt_pretraga_klijenta.setText(klijent.getIme() + " " + klijent.getPrezime());
                 }
             }
-        }catch (ParseException e){
+        } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
-         } catch (Exception ex) {
-             ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
@@ -253,10 +271,43 @@ public class FMRacun extends javax.swing.JDialog {
 
     private void btn_dodaj_novogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dodaj_novogActionPerformed
 
-        FMUnosKlijenata fmuk = new FMUnosKlijenata(this,true);
+        FMUnosKlijenata fmuk = new FMUnosKlijenata(this, true);
         fmuk.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_dodaj_novogActionPerformed
+
+    private void jbt_obrisi_sa_racunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_obrisi_sa_racunaActionPerformed
+
+        TableModelRacun tmr = (TableModelRacun) tabela_racun.getModel();
+        TableModelAranzmani tma = (TableModelAranzmani) tabela_proizvodi.getModel();
+
+        try {
+            int e = tabela_racun.getSelectedRow();
+            Racun r = tmr.getRacuni().get(e);
+            
+            tma.getAranzmani().add(r.getAranzman());
+            tma.fireTableDataChanged();
+            
+            tmr.obrisiRed(e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Morate selektovati red.");
+        }
+    }//GEN-LAST:event_jbt_obrisi_sa_racunaActionPerformed
+
+    private void jbt_dodaj_na_racunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_dodaj_na_racunActionPerformed
+
+        TableModelAranzmani tma = (TableModelAranzmani) tabela_proizvodi.getModel();
+        TableModelRacun tmr = (TableModelRacun) tabela_racun.getModel();
+
+        try {
+            Aranzman ar = tma.getAranzmani().get(tabela_proizvodi.getSelectedRow());
+            tma.obrisiRed(tabela_proizvodi.getSelectedRow());
+            tmr.ubaciAranzman(ar);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Morate selektovati aranzman.");
+        }
+    }//GEN-LAST:event_jbt_dodaj_na_racunActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +353,7 @@ public class FMRacun extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_dodaj_novog;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -322,6 +374,14 @@ public class FMRacun extends javax.swing.JDialog {
         LinkedList<Racun> racuni = new LinkedList<>();
         TableModelRacun tmr = new TableModelRacun(racuni);
         tabela_racun.setModel(tmr);
+
+        try {
+            List<Aranzman> aranzmani = kontrolor.Kontrolor.getInstance().vratiListuAranzmanaPravih();
+            TableModelAranzmani tma = new TableModelAranzmani(aranzmani);
+            tabela_proizvodi.setModel(tma);
+        } catch (Exception exception) {
+            JOptionPane.showMessageDialog(this, "Ne mogu da ucitam aranzmane.");
+        }
     }
 
     private void ubaciRacunKlijentaUTabelu(String jmbg) {
