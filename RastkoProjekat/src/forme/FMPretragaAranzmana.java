@@ -194,7 +194,6 @@ public class FMPretragaAranzmana extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //  TableModelAranzmani tma = (TableModelAranzmani) jtbl_aranzmani.getModel();
         List<Aranzman> aranzmani = (List<Aranzman>) Kontrolor.getInstance().getMapa().get("aranzmani");
-        System.out.println(aranzmani.get(2).getMesto().getDrzava().getNaziv() + "  " + aranzmani.get(2).getTipAranzmana().getNaziv());
         List<Aranzman> novi = new LinkedList<>();
         Drzava d = (Drzava) jcmb_drzava.getSelectedItem();
         TipAranzmana ta = (TipAranzmana) jcmb_tipAranzmana.getSelectedItem();

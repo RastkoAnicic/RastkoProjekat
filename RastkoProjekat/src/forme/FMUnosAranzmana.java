@@ -9,7 +9,6 @@ import domen.Aranzman;
 import domen.Drzava;
 import domen.Mesto;
 import domen.TipAranzmana;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,9 +55,9 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         errorLblMesto = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jtxt_mesto = new javax.swing.JTextField();
         jtxt_novaDrzava = new javax.swing.JTextField();
         jbtn_ok = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,27 +146,28 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtxt_mesto, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbtn_ponisti)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbtn_sacuvaj))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(50, 50, 50))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(50, 50, 50))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addGap(86, 86, 86)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcmb_tipAranzmana, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcmb_drzava, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtxt_nazivAranzmana, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel7)
+                                        .addGap(91, 91, 91)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcmb_tipAranzmana, 0, 192, Short.MAX_VALUE)
+                                    .addComponent(jcmb_drzava, 0, 192, Short.MAX_VALUE)
+                                    .addComponent(jtxt_nazivAranzmana, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,8 +208,8 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jtxt_mesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtn_ok))
+                            .addComponent(jbtn_ok)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtn_sacuvaj)
@@ -224,36 +224,39 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
 
     private void jbtn_sacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_sacuvajActionPerformed
 
-        String mesto1 = jtxt_mesto.getText().toLowerCase();
-        
-        List<Mesto> mesta = new LinkedList<>();
-        try {
-            mesta = Kontrolor.getInstance().vratiListuMesta();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Ne mogu da uporedim mesta");
-        }
-        List<String> lista = new LinkedList<>();
-        
-        for (Mesto mesto2 : mesta) {
-            lista.add(mesto2.getNaziv().toLowerCase());
-        }
-        
-        if (!lista.contains(mesto1)){
-            JOptionPane.showMessageDialog(this, "Mesto ne postoji u bazi.");
-            return;
-        }
+        //String mesto1 = jtxt_mesto.getText().toLowerCase();
+//        String mesto1 = jComboBox1.getSelectedItem().toString();
+//        
+//        
+//        List<Mesto> mesta = new LinkedList<>();
+//        try {
+//            mesta = Kontrolor.getInstance().vratiListuMesta();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, "Ne mogu da uporedim mesta");
+//        }
+//        List<String> lista = new LinkedList<>();
+//        
+//        for (Mesto mesto2 : mesta) {
+//            lista.add(mesto2.getNaziv().toLowerCase());
+//        }
+//        
+//        if (!lista.contains(mesto1)){
+//            JOptionPane.showMessageDialog(this, "Mesto ne postoji u bazi.");
+//            return;
+//        }
         
         Aranzman ar = new Aranzman();
-        Mesto mesto = new Mesto();
+        Mesto mesto = (Mesto) jComboBox1.getSelectedItem();
         
-        for (Mesto mesto2 : mesta) {
-            if (jtxt_mesto.getText().toLowerCase().equals(mesto2.getNaziv().toLowerCase()))
-                mesto = mesto2;
-        }
+//        for (Mesto mesto2 : mesta) {
+//            if (jComboBox1.getSelectedItem().toString().toLowerCase().equals(mesto2.getNaziv().toLowerCase()))
+//                mesto = mesto2;
+//        }
 
         ar.setNaziv(jtxt_nazivAranzmana.getText());
         ar.setTipAranzmana((TipAranzmana) jcmb_tipAranzmana.getSelectedItem());
         ar.setMesto(mesto);
+        
         //nemamo aranzman ID
 
         dodajAranzmanUBazu(ar);
@@ -262,7 +265,7 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
     private void jbtn_ponistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_ponistiActionPerformed
 
         jcmb_tipAranzmana.setSelectedIndex(0);
-        jtxt_mesto.setText("");
+        //jtxt_mesto.setText("");
         jtxt_nazivAranzmana.setText("");
     }//GEN-LAST:event_jbtn_ponistiActionPerformed
 
@@ -298,6 +301,14 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
             jtxt_novaDrzava.setVisible(false);
             jbtn_ok.setVisible(false);
         }
+        
+        try {
+            List<Mesto> mesta = kontrolor.Kontrolor.getInstance().vratiListuMesta();
+            jComboBox1.setModel(new DefaultComboBoxModel(mesta.toArray()));
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ne mogu da ucitam mesta iz baze");
+        }
     }//GEN-LAST:event_jcmb_drzavaActionPerformed
 
     private void jtxt_novaDrzavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_novaDrzavaActionPerformed
@@ -316,9 +327,16 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
 
     private void jbtn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_okActionPerformed
         
-            Drzava drzava = new Drzava();
-        
+            LinkedList<Drzava> drzave = kontrolor.Kontrolor.getInstance().vratiListuDrzava();
+            
+            Drzava drzava = new Drzava();        
+            TipAranzmana ta = (TipAranzmana) jcmb_tipAranzmana.getSelectedItem();
+            
             drzava.setNaziv(jtxt_novaDrzava.getText());
+            
+            switch(ta.getTipAranzmanaID()){
+                
+            }
             
             ubaciDrzavuUBazu(drzava);
             
@@ -369,6 +387,7 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorLblDrzava;
     private javax.swing.JLabel errorLblMesto;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -379,7 +398,6 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
     private javax.swing.JButton jbtn_sacuvaj;
     private javax.swing.JComboBox<String> jcmb_drzava;
     private javax.swing.JComboBox<String> jcmb_tipAranzmana;
-    private javax.swing.JTextField jtxt_mesto;
     private javax.swing.JTextField jtxt_nazivAranzmana;
     private javax.swing.JTextField jtxt_novaDrzava;
     // End of variables declaration//GEN-END:variables
@@ -411,9 +429,6 @@ public class FMUnosAranzmana extends javax.swing.JDialog {
     }
 
     private void dodajAranzmanUBazu(Aranzman ar) {
-        System.out.println(ar.getAranzmanID() + " " + ar.getNaziv() + 
-                " " + ar.getMesto() + " " +ar.getMesto().getMestoID() + 
-                " " + ar.getTipAranzmana() + " " + ar.getTipAranzmana().getTipAranzmanaID());
         try {
             
             Kontrolor.getInstance().ubaciAranzmanUBazu(ar);

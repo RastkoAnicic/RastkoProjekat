@@ -18,29 +18,18 @@ public class StavkaRacuna implements Serializable {
     private Aranzman aranzman;
     private Termin termin;
     private int kolicina;
-    private double cena;
-    private double iznos;
 
     public StavkaRacuna() {
     }
 
-    public StavkaRacuna(int redniBrojStavke, Racun racun, Aranzman aranzman, Termin termin, int kolicina, double cena, double iznos) {
+    public StavkaRacuna(int redniBrojStavke, Racun racun, Aranzman aranzman, Termin termin, int kolicina) {
         this.redniBrojStavke = redniBrojStavke;
         this.racun = racun;
         this.aranzman = aranzman;
         this.termin = termin;
         this.kolicina = kolicina;
-        this.cena = cena;
-        this.iznos = iznos;
     }
 
-    public double getIznos() {
-        return iznos;
-    }
-
-    public void setIznos(double iznos) {
-        this.iznos = iznos;
-    }
 
     public int getRedniBrojStavke() {
         return redniBrojStavke;
@@ -82,13 +71,6 @@ public class StavkaRacuna implements Serializable {
         this.kolicina = kolicina;
     }
 
-    public double getCena() {
-        return cena;
-    }
-
-    public void setCena(double cena) {
-        this.cena = cena;
-    }
     
     
 }

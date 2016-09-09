@@ -11,7 +11,9 @@ import domen.Drzava;
 import domen.Klijent;
 import domen.Mesto;
 import domen.Racun;
+import domen.Radnik;
 import domen.TipAranzmana;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -223,6 +225,32 @@ public class Kontrolor {
             throw new Exception(sto.getGreska());
         }
         
+    }
+
+    public Radnik proveraLogovanja(Radnik r) throws Exception {
+        
+        Socket s = (Socket) getMapa().get(util.Util.MAP_KEY_SOKET);
+        ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
+
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(util.Util.OPERACIJA_VRATI_RADNIKA);
+        kto.setParametar(r);
+        out.writeObject(kto);
+
+        ObjectInputStream in = new ObjectInputStream(s.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) in.readObject();
+        if (sto.getStatus() == util.Util.SERVER_STATUS_OPERACIJA_OK) {
+            return (Radnik) sto.getRezultat();
+        } else {
+            throw new Exception(sto.getGreska());
+        }
+    }
+
+    public LinkedList<Drzava> vratiListuDrzava() {
+       
+        LinkedList<Drzava> drzave = new LinkedList<>();
+        
+        return drzave;
     }
 
 }

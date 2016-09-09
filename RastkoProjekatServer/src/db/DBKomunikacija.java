@@ -10,11 +10,10 @@ import domen.Drzava;
 import domen.Klijent;
 import domen.Mesto;
 import domen.Racun;
-import domen.StavkaRacuna;
+import domen.Radnik;
 import domen.Termin;
 import domen.TipAranzmana;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +21,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import util.Util;
+import domen.Radnik;
 
 /**
  *
@@ -49,17 +50,21 @@ public class DBKomunikacija {
     public void ucitajDrajver() {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
+            Class.forName(Util.getInstance().getDriver());
+
+        } catch (Exception ex) {
             System.err.println("Nije ucitan drajver");
         }
     }
 
     public void otvoriKonekciju() {
         try {
-            konekcija = DriverManager.getConnection("jdbc:mysql://localhost:3306/turistickaagencija", "root", "");
+            String url = Util.getInstance().getUrl();
+            String user = Util.getInstance().getUser();
+            String password = Util.getInstance().getPassword();
+            konekcija = DriverManager.getConnection(url, user, password);
             konekcija.setAutoCommit(false);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.err.println("Nije otvorena konekcija");
         }
     }
@@ -216,6 +221,7 @@ public class DBKomunikacija {
         String upit = "insert into drzava values (?,?)";
         PreparedStatement ps = konekcija.prepareStatement(upit);
 
+        ps.setInt(1, drzava.getDrzavaID());
         ps.setString(2, drzava.getNaziv());
 
         ps.executeUpdate();
@@ -240,7 +246,6 @@ public class DBKomunikacija {
             drzava.setDrzavaID(rs.getInt("drzavaid"));
             mesta.add(mesto);
         }
-        //  System.out.println(prijave);
         rs.close();
         sta.close();
 
@@ -285,7 +290,6 @@ public class DBKomunikacija {
 
             aranzmani.add(aranzman);
         }
-        //  System.out.println(prijave);
         rs.close();
         sta.close();
         commit();
@@ -322,8 +326,6 @@ public class DBKomunikacija {
             racun.setDatum(rs.getDate("datumracuna"));
             racun.setUkupanIznos((rs.getDouble("ukupanIznos")));
 
-            //JOS MESTO DRZAVU I TIP ARANZMANA NISAM UBACIO OVDE
-            //tipAranzmana.setNaziv("nazivtipaaranzmana");
             aranzman.setAranzmanID(rs.getInt("aranzmanid"));
             aranzman.setCena(rs.getDouble("ukupaniznos"));
             aranzman.setNaziv(rs.getString("nazivaranzmana"));
@@ -341,7 +343,6 @@ public class DBKomunikacija {
 
             racuni.add(racun);
         }
-        //  System.out.println(prijave);
         rs.close();
         sta.close();
 
@@ -349,4 +350,47 @@ public class DBKomunikacija {
         return racuni;
 
     }
+
+    public Radnik vratiRadnika(Radnik r) throws Exception {
+
+        List<Radnik> radnici = new LinkedList<>();
+
+        String upit = "select * from radnik";
+        Statement sta = konekcija.createStatement();
+        ResultSet rs = sta.executeQuery(upit);
+
+        while (rs.next()) {
+
+            Radnik radnik = new Radnik();
+
+            radnik.setUsername(rs.getString("username"));
+            radnik.setPassword(rs.getString("password"));
+
+            radnici.add(radnik);
+        }
+
+        rs.close();
+        sta.close();
+
+        commit();
+
+        for (Radnik radnik1 : radnici) {
+            if (r.getUsername().equals(radnik1.getUsername()) && r.getPassword().equals(radnik1.getPassword())) {
+                return radnik1;
+            }
+        }
+
+        return null;
+
+    }
+    
+    public LinkedList<Drzava> vratiListuDrzava() throws Exception {
+    
+        LinkedList<Drzava> drzave = new LinkedList<>();
+        
+        
+        return drzave;
+    
+    }
+    
 }

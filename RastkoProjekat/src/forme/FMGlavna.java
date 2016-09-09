@@ -17,6 +17,10 @@ public class FMGlavna extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    public FMGlavna(String username) {
+        initComponents();
+        pozicionirajFormu(username);
+    }
     public FMGlavna() {
         initComponents();
         pozicionirajFormu();
@@ -33,6 +37,8 @@ public class FMGlavna extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        labela_radnik = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         klijent = new javax.swing.JMenu();
         pretragaKlijenata = new javax.swing.JMenuItem();
@@ -48,6 +54,14 @@ public class FMGlavna extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Turisticka agencija");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Dobrodošli");
+        jLabel1.setToolTipText("");
+
+        labela_radnik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labela_radnik.setText("jLabel2");
 
         klijent.setText("Klijent");
 
@@ -103,11 +117,21 @@ public class FMGlavna extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labela_radnik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labela_radnik)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,7 +163,7 @@ public class FMGlavna extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
-      FMRacun fmr = new FMRacun(this, true);
+      FMRacuni fmr = new FMRacuni(this, true);
       fmr.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -181,11 +205,13 @@ public class FMGlavna extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aranzman;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu klijent;
+    private javax.swing.JLabel labela_radnik;
     private javax.swing.JMenuItem pretragaKlijenata;
     private javax.swing.JMenuItem pretraga_aranzmana;
     private javax.swing.JMenuItem unosKlijenata;
@@ -195,6 +221,11 @@ public class FMGlavna extends javax.swing.JFrame {
 private void pozicionirajFormu(){
     //setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
-
+        //labela_radnik.setText("Ulogovani ste kao: " +);
+}
+private void pozicionirajFormu(String username){
+    //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        labela_radnik.setText("Ulogovani ste kao: " +username);
 }
 }

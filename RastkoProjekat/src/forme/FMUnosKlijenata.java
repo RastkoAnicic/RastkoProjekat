@@ -63,15 +63,18 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         jerror_mail = new javax.swing.JLabel();
         jerror_telefon = new javax.swing.JLabel();
         jerror_jmbg = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Unos klijenata");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         telefonKlijenta_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonKlijenta_txtActionPerformed(evt);
             }
         });
+        getContentPane().add(telefonKlijenta_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 145, 199, -1));
 
         sacuvajKlijenta_btn.setText("Sačuvaj");
         sacuvajKlijenta_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +82,12 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
                 sacuvajKlijenta_btnActionPerformed(evt);
             }
         });
+        getContentPane().add(sacuvajKlijenta_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 226, -1, -1));
 
         lbl_naslov.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_naslov.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_naslov.setText("Novi klijent");
+        getContentPane().add(lbl_naslov, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 428, 36));
 
         ponisti_btn.setText("Poništi");
         ponisti_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -90,92 +95,40 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
                 ponisti_btnActionPerformed(evt);
             }
         });
+        getContentPane().add(ponisti_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 226, 80, -1));
 
         jLabel2.setText("Ime i prezime klijenta*:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 62, -1, -1));
 
         jLabel3.setText("e-mail:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 105, -1, -1));
 
         jLabel4.setText("Telefon:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 148, -1, -1));
 
         jLabel5.setText("JMBG*:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 191, -1, -1));
 
         ImePrezimeKlijenta_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ImePrezimeKlijenta_txtActionPerformed(evt);
             }
         });
+        getContentPane().add(ImePrezimeKlijenta_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 59, 199, -1));
+        getContentPane().add(jmbgKlijenta_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 188, 199, -1));
+        getContentPane().add(eMailKlijenta_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 102, 199, -1));
 
         jerror_ime_prezime.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jerror_ime_prezime.setForeground(new java.awt.Color(255, 0, 51));
+        getContentPane().add(jerror_ime_prezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 59, 250, 20));
+        getContentPane().add(jerror_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 102, 250, 20));
+        getContentPane().add(jerror_telefon, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 145, 250, 20));
 
         jerror_jmbg.setText(" ");
+        getContentPane().add(jerror_jmbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 188, 250, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ImePrezimeKlijenta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jmbgKlijenta_txt)
-                            .addComponent(eMailKlijenta_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                            .addComponent(telefonKlijenta_txt)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ponisti_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sacuvajKlijenta_btn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jerror_mail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jerror_ime_prezime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jerror_telefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jerror_jmbg, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                .addContainerGap(97, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lbl_naslov, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lbl_naslov, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(ImePrezimeKlijenta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jerror_ime_prezime, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eMailKlijenta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jerror_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telefonKlijenta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jerror_telefon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jmbgKlijenta_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jerror_jmbg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sacuvajKlijenta_btn)
-                    .addComponent(ponisti_btn))
-                .addGap(0, 51, Short.MAX_VALUE))
-        );
+        jLabel1.setText(" ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -312,7 +265,6 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
             klijent.setMejl(eMailKlijenta_txt.getText());
             klijent.setJmbg(jmbgKlijenta_txt.getText());
             klijent.setTelefon(telefonKlijenta_txt.getText());
-            System.out.println("forme.FMUnosKlijenata.sacuvajKlijenta_btnActionPerformed()");
           
             Kontrolor.getInstance().unesiKlijenta(klijent);
             JOptionPane.showMessageDialog(this, "Uspešno ste uneli klijenta");
@@ -328,6 +280,10 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         telefonKlijenta_txt.setText("");
         ImePrezimeKlijenta_txt.setText("");
         eMailKlijenta_txt.setText("");
+        jerror_ime_prezime.setVisible(false);
+        jerror_jmbg.setVisible(false);
+        jerror_mail.setVisible(false);
+        jerror_telefon.setVisible(false);
     }//GEN-LAST:event_ponisti_btnActionPerformed
 
     private void ImePrezimeKlijenta_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImePrezimeKlijenta_txtActionPerformed
@@ -407,6 +363,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ImePrezimeKlijenta_txt;
     private javax.swing.JTextField eMailKlijenta_txt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -436,7 +393,7 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         telefonKlijenta_txt.setEditable(false);
         eMailKlijenta_txt.setEditable(false);
         jmbgKlijenta_txt.setEditable(false);
-        ImePrezimeKlijenta_txt.setEnabled(false);
+        //ImePrezimeKlijenta_txt.setEnabled(false);
 
         ponisti_btn.setVisible(false);
         sacuvajKlijenta_btn.setVisible(false);
@@ -453,7 +410,6 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         DocumentListener dl = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                System.out.println(telefonKlijenta_txt.getText());
                 proveriImePrezime();
             }
 
@@ -553,11 +509,13 @@ public class FMUnosKlijenata extends javax.swing.JDialog {
         if (jmbgKlijenta_txt.getText().equals("")){
             throw new Exception("Morate uneti JMBG");
         }
-        if (eMailKlijenta_txt.getText().equals("") || telefonKlijenta_txt.getText().equals("")){
-            throw new Exception("Morate uneti ili telefon ili email");
+        if (eMailKlijenta_txt.getText().equals("")){
+            throw new Exception("Morate uneti email");
         }
-               
-        
+        if (telefonKlijenta_txt.getText().equals("")){
+            throw new Exception("Morate uneti telefon");
+        }
+              
         if (jerror_ime_prezime.isVisible()){
             throw new Exception("Pogresno uneto ime i prezime");
         }

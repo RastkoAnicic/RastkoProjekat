@@ -8,6 +8,7 @@ package forme;
 import domen.Aranzman;
 import domen.Klijent;
 import domen.Racun;
+import domen.StavkaRacuna;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,17 +19,18 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import tabele.TableModelAranzmani;
 import tabele.TableModelRacun;
+import tabele.TableModelStavkeRacuna;
 
 /**
  *
  * @author Rastko
  */
-public class FMRacun extends javax.swing.JDialog {
+public class FMRacuni extends javax.swing.JDialog {
 
     /**
      * Creates new form FMRacun
      */
-    public FMRacun(java.awt.Frame parent, boolean modal) {
+    public FMRacuni(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         postaviModelTabele();
@@ -58,6 +60,7 @@ public class FMRacun extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela_proizvodi = new javax.swing.JTable();
         jbt_pronadji = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -136,9 +139,9 @@ public class FMRacun extends javax.swing.JDialog {
                 .addGap(60, 60, 60))
         );
 
-        jTabbedPane1.addTab("Racun", jPanel3);
+        jTabbedPane1.addTab("Račun", jPanel3);
 
-        jbt_dodaj_na_racun.setText("Dodaj na racun");
+        jbt_dodaj_na_racun.setText("Dodaj na račun");
         jbt_dodaj_na_racun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbt_dodaj_na_racunActionPerformed(evt);
@@ -189,6 +192,13 @@ public class FMRacun extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setText("Dodaj novi račun");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,9 +212,12 @@ public class FMRacun extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxt_pretraga_klijenta, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbt_pronadji)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_dodaj_novog)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbt_pronadji)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_dodaj_novog))
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -216,7 +229,9 @@ public class FMRacun extends javax.swing.JDialog {
                     .addComponent(jtxt_pretraga_klijenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbt_pronadji)
                     .addComponent(btn_dodaj_novog))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -284,10 +299,10 @@ public class FMRacun extends javax.swing.JDialog {
         try {
             int e = tabela_racun.getSelectedRow();
             Racun r = tmr.getRacuni().get(e);
-            
+
             tma.getAranzmani().add(r.getAranzman());
             tma.fireTableDataChanged();
-            
+
             tmr.obrisiRed(e);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Morate selektovati red.");
@@ -297,63 +312,82 @@ public class FMRacun extends javax.swing.JDialog {
     private void jbt_dodaj_na_racunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_dodaj_na_racunActionPerformed
 
         TableModelAranzmani tma = (TableModelAranzmani) tabela_proizvodi.getModel();
-        TableModelRacun tmr = (TableModelRacun) tabela_racun.getModel();
+        TableModelStavkeRacuna tmsr = (TableModelStavkeRacuna) tabela_racun.getModel();
 
         try {
             Aranzman ar = tma.getAranzmani().get(tabela_proizvodi.getSelectedRow());
             tma.obrisiRed(tabela_proizvodi.getSelectedRow());
-            tmr.ubaciAranzman(ar);
+            StavkaRacuna sr = new StavkaRacuna(); 
             
+            sr.setAranzman(ar);
+            
+            List<StavkaRacuna> stavkeracuna = new LinkedList<>();
+            stavkeracuna.add(sr);
+            
+            tmsr.setStavkeRacuna(stavkeracuna);
+            tabela_racun.setModel(tmsr);
+            tmsr.fireTableDataChanged();
+
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Morate selektovati aranzman.");
         }
     }//GEN-LAST:event_jbt_dodaj_na_racunActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String klijent = jtxt_pretraga_klijenta.getText();
+        FMNoviRacun fmn = new FMNoviRacun(null, true, klijent);
+        fmn.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FMRacun dialog = new FMRacun(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(FMRacun.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                FMRacun dialog = new FMRacun(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_dodaj_novog;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -371,8 +405,8 @@ public class FMRacun extends javax.swing.JDialog {
 
     private void postaviModelTabele() {
 
-        LinkedList<Racun> racuni = new LinkedList<>();
-        TableModelRacun tmr = new TableModelRacun(racuni);
+        LinkedList<StavkaRacuna> stavkeRacuna = new LinkedList<>();
+        TableModelStavkeRacuna tmr = new TableModelStavkeRacuna(stavkeRacuna);
         tabela_racun.setModel(tmr);
 
         try {
@@ -388,10 +422,16 @@ public class FMRacun extends javax.swing.JDialog {
 
         try {
             LinkedList<Racun> sr = kontrolor.Kontrolor.getInstance().vratiListuRacuna();
-            TableModelRacun tmr = new TableModelRacun(sr);
+            LinkedList<Racun> novi = new LinkedList<>();
+            for (Racun racun : sr) {
+                if(racun.getKlijent().getJmbg().equals(jmbg)){
+                    novi.add(racun);
+                }
+            }
+            TableModelRacun tmr = new TableModelRacun(novi);
             tabela_racun.setModel(tmr);
         } catch (Exception ex) {
-            Logger.getLogger(FMRacun.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FMRacuni.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

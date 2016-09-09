@@ -6,6 +6,7 @@
 package start;
 
 import forme.FMGlavna;
+import forme.FMLogin;
 import java.io.IOException;
 import java.net.Socket;
 import kontrolor.Kontrolor;
@@ -20,8 +21,10 @@ public class Start {
 
         Socket ss = new Socket("127.0.0.1", 9000);
         Kontrolor.getInstance().getMapa().put(util.Util.MAP_KEY_SOKET, ss);
-        FMGlavna glavna = new FMGlavna();
-        glavna.setVisible(true);
+//        FMGlavna glavna = new FMGlavna();
+//        glavna.setVisible(true);
+        FMLogin fmlogin = new FMLogin(null, true);
+        fmlogin.setVisible(true);
 
     }
 }
